@@ -24,7 +24,7 @@ def train(data, input_model={'START': [], 'END': []}):
         if i == len(data)-1:
             model['END'].append(element)
         else:
-            if i == 1:
+            if i == 0:
                 model['START'].append(element)
 
             if element in model:
