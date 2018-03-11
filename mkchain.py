@@ -3,10 +3,6 @@ import copy
 from collections import defaultdict
 
 
-def main():
-    pass
-
-
 def train(data, input_model=None):
     """Trains a model using the input data and outputs a dictionary.
 
@@ -65,7 +61,3 @@ def generate(model, length=5):
             break
 
     return generated_data
-
-
-if __name__ == '__main__':
-    main()
