@@ -20,7 +20,7 @@ def train(data, input_model=None):
         and lists of next words as elements.
     """
     if input_model is None:
-        input_model = defaultdict(list)  # {'START': [], 'END': []}
+        input_model = defaultdict(list)
     else:
         input_model = defaultdict(list, input_model)
 
@@ -29,11 +29,12 @@ def train(data, input_model=None):
     for i, element in enumerate(data):
         if i == len(data)-1:
             model['END'].append(element)
-        else:
-            if i == 0:
-                model['START'].append(element)
+            break
 
-            model[element].append(data[i+1])
+        if i == 0:
+            model['START'].append(element)
+
+        model[element].append(data[i+1])
 
     return model
 
