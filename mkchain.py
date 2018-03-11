@@ -3,6 +3,48 @@ import copy
 from collections import defaultdict
 
 
+class Model(object):
+    """A text generation model based on markov chains."""
+
+    def __init__(self):
+        self.model = defaultdict(list)
+
+    def train(self, s):
+        """Train the model with the specified string."""
+        words = s.split()
+        for i, word in enumerate(words):
+            if i == len(words)-1:
+                self.model['END'].append(word)
+                break
+
+            if i == 0:
+                self.model['START'].append(word)
+
+            self.model[word].append(words[i+1])
+
+    def generate(self, word_limit=None):
+        """Generate a string from the model, with an optional word limit."""
+        if not self.model:
+            return ""
+
+        generated_words = []
+        next_word = None
+
+        while next_word not in self.model['END']:
+            if word_limit is not None and len(generated_words) >= word_limit:
+                break
+
+            if len(generated_words) == 0:
+                potential_words = self.model['START']
+            else:
+                potential_words = self.model[generated_words[-1]]
+
+            next_word = random.choice(potential_words)
+            generated_words.append(next_word)
+
+        return " ".join(generated_words)
+
+
 def train(data, input_model=None):
     """Trains a model using the input data and outputs a dictionary.
 
