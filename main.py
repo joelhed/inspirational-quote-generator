@@ -22,7 +22,7 @@ def generate_text(model_file='data', output_file='generated', amount=100):
     with open(output_file+'.txt', '+w') as file:
         for i in range(amount):
             while True:
-                txt = mkchain.generate(model, length=50)
+                txt = mkchain.generate(model, word_limit=50)
                 if len(txt) > 20:
                     break
 

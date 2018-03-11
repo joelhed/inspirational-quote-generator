@@ -7,13 +7,13 @@ def train(data, input_model=None):
     """Trains a model using the input data and outputs a dictionary.
 
     Args:
-        data(list) : This is the input data and the training will be based on.
-        input_mode(dict) : This can be another pre trained model that includes
+        data (list): This is the input data and the training will be based on.
+        input_mode (dict): This can be another pre trained model that includes
             words as keys and lists of next words.
 
-    Return:
-        returns a trained model which is a dictionary that has words as keys
-        and lists of next words as elements.
+    Returns:
+        dict: A trained model that has words as keys and lists of next
+        words as elements.
     """
     if input_model is None:
         input_model = defaultdict(list)
@@ -35,20 +35,24 @@ def train(data, input_model=None):
     return model
 
 
-def generate(model, length=5):
+def generate(model, word_limit=5):
     """This is to generate a data based on the input model.
 
     Args:
-        model(dict) : a pre trained model.
-        length(int) : length of the generated text if does not reach an end
-            word.
+        model (dict): A pre trained model.
+        word_limit (int): The maximum word length of the generated text, if it
+            doesn't reach an end word.
 
     Returns:
-        A generated lists based on the data provided to the model.
+        list: A generated list based on the data provided to the model.
     """
     generated_data = []
+    next_word = None
 
-    for i in range(length):
+    while next_word not in model['END']:
+        if len(generated_data) == word_limit:
+            break
+
         if len(generated_data) == 0:
             potential_words = model['START']
         else:
@@ -56,8 +60,5 @@ def generate(model, length=5):
 
         next_word = random.choice(potential_words)
         generated_data.append(next_word)
-
-        if next_word in model['END']:
-            break
 
     return generated_data
