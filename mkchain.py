@@ -1,12 +1,13 @@
 import random
 import copy
+from collections import defaultdict
 
 
 def main():
     pass
 
 
-def train(data, input_model={'START': [], 'END': []}):
+def train(data, input_model=None):
     """Trains a model using the input data and outputs a dictionary.
 
     Args:
@@ -18,6 +19,11 @@ def train(data, input_model={'START': [], 'END': []}):
         returns a trained model which is a dictionary that has words as keys
         and lists of next words as elements.
     """
+    if input_model is None:
+        input_model = defaultdict(list)  # {'START': [], 'END': []}
+    else:
+        input_model = defaultdict(list, input_model)
+
     # Clone the input functiont to prevent affectin the input model.
     model = copy.deepcopy(input_model)
     for i, element in enumerate(data):
@@ -27,10 +33,7 @@ def train(data, input_model={'START': [], 'END': []}):
             if i == 0:
                 model['START'].append(element)
 
-            if element in model:
-                model[element].append(data[i+1])
-            else:
-                model[element] = [data[i+1]]
+            model[element].append(data[i+1])
 
     return model
 
