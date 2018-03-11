@@ -54,7 +54,7 @@ def generate(model, length=5):
         else:
             potential_words = model[generated_data[-1]]
 
-        next_word = potential_words[random.randint(0, len(potential_words)-1)]
+        next_word = random.choice(potential_words)
         generated_data.append(next_word)
 
         if next_word in model['END']:
