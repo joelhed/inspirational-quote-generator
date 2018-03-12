@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inspirational qoute generator</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}?q={{ rand_str }}" />
+  </head>
+  <body>
+    <div class="parent">
+      <p class="quote">{{ quote }}</p>
+    </div>
+    <script>
+      const width = window.innerWidth
+      const height = window.innerHeight
+      document.body.style.backgroundImage = "url('https://picsum.photos/" + width + "/" + height + "?random')"
+    </script>
+  </body>
+</html>

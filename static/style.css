@@ -1,0 +1,16 @@
+.parent {
+    position: relative;
+}
+
+.quote {
+    font-family: 'Raleway', helvetica, sans-serif;
+    font-size: 36pt;
+    color: #EEEEEE;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 70%);
+    
+    text-align: center;
+}
